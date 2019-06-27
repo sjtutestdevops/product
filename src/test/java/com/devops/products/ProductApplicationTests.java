@@ -1,4 +1,4 @@
-package com.devops.users;
+package com.devops.products;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
