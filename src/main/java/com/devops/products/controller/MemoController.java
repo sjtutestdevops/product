@@ -1,5 +1,6 @@
-package com.devops.products;
+package com.devops.products.controller;
 
+import com.devops.products.service.MemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,7 @@ public class MemoController {
     
 //  查看是否过期
     @RequestMapping(value = "/isexpired", method = RequestMethod.GET)
-    public Object isExpired(@RequestParam(value = "memo_id", required = true) String memo_id){
+    public Object isExpired(@RequestParam(value = "memo_id", required = true) Integer memo_id){
         return memoService.isExpired(memo_id);
     }
 }

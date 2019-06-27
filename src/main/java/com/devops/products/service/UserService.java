@@ -1,4 +1,4 @@
-package com.devops.products;
+package com.devops.products.service;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +14,6 @@ public interface UserService {
     String test2(@RequestParam(value = "name", required = true) String name);
     
     @RequestMapping(value = "/getuserid", method = RequestMethod.GET)
-    String getUserId(@RequestParam(value = "name", required = true) String name);
+    Integer getUserId(@RequestParam(value = "name", required = true) String name);
 
 }
