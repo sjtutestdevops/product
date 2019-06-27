@@ -23,7 +23,11 @@ public class ProductController {
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
     public String test() {
-        return userService.test();
+        try {
+            return userService.test();
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
