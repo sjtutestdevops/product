@@ -8,14 +8,27 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.regex.Pattern;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
 @Service
 public class MemoService {
+	
+	@Autowired
+	private HttpClient httpClient;
 
-	public String setMemo(String product_name, String user_id, Integer exp) {
+	public String setMemo(String product_name, String user_name, Integer exp) {
 		try {
+			String user_id = getUserId(user_name);
+			if(isNumeric(user_id) == false) {
+				return "fail";
+			}
+			
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://10.0.2.174:3306/devops?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT";
             Connection conn = DriverManager.getConnection(url, "root", "ym19950823");
@@ -30,11 +43,16 @@ public class MemoService {
         }
 	}
 	
-	public ArrayList<MemoEntity> getUserMemo(String user_id) {
+	public ArrayList<MemoEntity> getUserMemo(String user_name) {
 		try {
+			String user_id = getUserId(user_name);
+			if(isNumeric(user_id) == false) {
+				return new ArrayList<MemoEntity>();
+			}
+			
             Class.forName("com.mysql.jdbc.Driver");
-            String url = "jdbc:mysql://10.0.2.174:3306/devops?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT";
-            Connection conn = DriverManager.getConnection(url, "root", "ym19950823");
+            String sql_url = "jdbc:mysql://10.0.2.174:3306/devops?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT";
+            Connection conn = DriverManager.getConnection(sql_url, "root", "ym19950823");
             Statement stat = conn.createStatement();
             
             String sql = "select * from memo where user_id = '"+ user_id + "'";
@@ -88,5 +106,19 @@ public class MemoService {
         } catch (Exception e) {
             return false;
         }
+	}
+
+	public String getUserId(String user_name) {
+		String url = "http://localhost:30472/getuserid?name="+user_name;
+		HttpMethod httpMethod = HttpMethod.GET;
+		MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+		String user_id = httpClient.client(url, httpMethod, params);
+		System.out.println(user_id);
+		return user_id;	
+	}
+	
+	public boolean isNumeric(String str){
+	    Pattern pattern = Pattern.compile("[0-9]*");
+	    return pattern.matcher(str).matches();   
 	}
 }

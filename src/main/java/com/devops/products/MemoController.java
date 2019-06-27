@@ -15,15 +15,15 @@ public class MemoController {
 //	创建开封备忘
 	@RequestMapping(value = "/setmemo", method = RequestMethod.GET)
     public Object setMemo(@RequestParam(value = "product_name", required = true) String product_name,
-    		@RequestParam(value = "user_id", required = true) String user_id,
+    		@RequestParam(value = "user_name", required = true) String user_name,
     		@RequestParam(value = "exp", required = true) Integer exp){
-        return memoService.setMemo(product_name, user_id, exp);
+        return memoService.setMemo(product_name, user_name, exp);
     }
     
 //	查看用户的所有备忘
     @RequestMapping(value = "/getusermemo", method = RequestMethod.GET)
-    public Object getUserMemo(@RequestParam(value = "user_id", required = true) String user_id){
-        return memoService.getUserMemo(user_id);
+    public Object getUserMemo(@RequestParam(value = "user_name", required = true) String user_name){
+        return memoService.getUserMemo(user_name);
     }
     
     
