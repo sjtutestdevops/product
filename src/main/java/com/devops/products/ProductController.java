@@ -29,6 +29,15 @@ public class ProductController {
             return e.toString();
         }
     }
+    
+    @RequestMapping(value = "/test2", method = RequestMethod.GET)
+    public String test2(@RequestParam(value = "name", required = true) String name) {
+        try {
+            return userService.test2(name);
+        } catch (Exception e) {
+            return e.toString();
+        }
+    }
 
     @RequestMapping(value = "/test1", method = RequestMethod.GET)
     public String test1() throws Exception{

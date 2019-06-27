@@ -21,10 +21,13 @@ public class MemoService {
 	
 	@Autowired
 	private HttpClient httpClient;
+	@Autowired
+	private UserService userService;
 
 	public String setMemo(String product_name, String user_name, Integer exp) {
 		try {
-			String user_id = getUserId(user_name);
+//			String user_id = getUserId(user_name);
+			String user_id = userService.getUserId(user_name);
 			if(isNumeric(user_id) == false) {
 				return "fail";
 			}
@@ -45,7 +48,8 @@ public class MemoService {
 	
 	public ArrayList<MemoEntity> getUserMemo(String user_name) {
 		try {
-			String user_id = getUserId(user_name);
+//			String user_id = getUserId(user_name);
+			String user_id = userService.getUserId(user_name);
 			if(isNumeric(user_id) == false) {
 				return new ArrayList<MemoEntity>();
 			}
