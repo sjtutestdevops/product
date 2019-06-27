@@ -30,32 +30,6 @@ public class ProductController {
         }
     }
 
-    @RequestMapping(value = "/test1", method = RequestMethod.GET)
-    public String test1() throws Exception{
-        CloseableHttpClient client = null;
-        CloseableHttpResponse response = null;
-        String url = "http://30472.grff4a78.9upmwa3t.590bc8.grapps.cn/test1";
-        try {
-            HttpGet httpGet = new HttpGet(url);
-
-            client = HttpClients.createDefault();
-            response = client.execute(httpGet);
-            HttpEntity entity = response.getEntity();
-            String result = EntityUtils.toString(entity);
-            return result;
-        } catch (Exception e) {
-            return e.getMessage();
-        } finally {
-            if (response != null) {
-                response.close();
-            }
-            if (client != null) {
-                client.close();
-            }
-        }
-
-    }
-
 //    查看主要成分
 	@RequestMapping(value = "/getmainindients", method = RequestMethod.GET)
     public Object getMainIndients(@RequestParam(value = "name", required = true) String name){
