@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.goodrain</groupId>
-    <artifactId>users</artifactId>
+    <artifactId>product</artifactId>
     <version>1.0.0</version>
     <name>spring-boot-demo</name>
     <description>Demo project for Spring Boot</description>

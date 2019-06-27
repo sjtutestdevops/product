@@ -12,6 +12,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
+    @RequestMapping(value = "/test", method = RequestMethod.GET)
+    public Object test() {
+        return "Success";
+    }
+
 //    查看主要成分
 	@RequestMapping(value = "/getmainindients", method = RequestMethod.GET)
     public Object getMainIndients(@RequestParam(value = "name", required = true) String name){
