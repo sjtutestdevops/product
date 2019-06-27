@@ -11,11 +11,13 @@ public class ProductController {
 	
     @Autowired
     private ProductService productService;
+    @Autowired
+    private UserService userService;
 
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
-    public Object test() {
-        return "Success";
+    public String test() {
+        return userService.test();
     }
 
 //    查看主要成分
