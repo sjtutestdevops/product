@@ -26,7 +26,7 @@ public class ProductController {
         try {
             return userService.test();
         } catch (Exception e) {
-            return e.getMessage();
+            return e.toString();
         }
     }
 
